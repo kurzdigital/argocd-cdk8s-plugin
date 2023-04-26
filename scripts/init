@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -ue
+
+# We need a home directory set for helm to be able to write its caches somewhere.
+export HOME=/tmp/helm/
+
+# TypeScript support: cdk8s projects are just npm projects, so we only need to install the depencendencies
+find . -iname 'package.json' | while read -r cdk8s; do
+    pushd "$(dirname "$cdk8s")" >/dev/null
+    npm install
+    popd >/dev/null
+done
+
+# TODO: Python support
+# TODO: Java support
+# TODO: Go support
