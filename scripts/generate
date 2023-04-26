@@ -5,8 +5,8 @@ set -ue
 ARGOCD_ENV_CDK8S_ENV=${ARGOCD_ENV_CDK8S_ENV:-main}
 
 if [ -f "package.json" ]; then
-    # TypeScript support: compile to JS and run the JS file
-    npm run build && node "$ARGOCD_ENV_CDK8S_ENV.js"
+    # TypeScript support
+    npm ci && ts-node "$ARGOCD_ENV_CDK8S_ENV.ts"
     exit 0
 fi
 

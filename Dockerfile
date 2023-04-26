@@ -8,7 +8,8 @@ RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linu
 
 FROM node:16-slim
 
-RUN apt-get update && apt-get install git ca-certificates -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install git ca-certificates -y --no-install-recommends && rm -rf /var/lib/apt/lists/* && \
+    npm install -g ts-node
 COPY --from=helm /usr/local/bin/ /usr/local/bin/
 COPY plugin.yaml /home/argocd/cmp-server/config/plugin.yaml
 COPY scripts/* /
