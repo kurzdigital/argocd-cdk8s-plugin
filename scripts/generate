@@ -7,6 +7,7 @@ ARGOCD_ENV_CDK8S_ENV=${ARGOCD_ENV_CDK8S_ENV:-main}
 if [ -f "package.json" ]; then
     # TypeScript support
     npm ci && ts-node "$ARGOCD_ENV_CDK8S_ENV.ts"
+    cat dist/*yaml
     exit 0
 fi
 
