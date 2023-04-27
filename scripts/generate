@@ -4,8 +4,7 @@ set -ue
 
 if [ -f "package.json" ]; then
     # TypeScript support
-    npm ci && ts-node "main.ts"
-    cat dist/*yaml
+    npm ci && ts-node "main.ts" 
     exit 0
 fi
 

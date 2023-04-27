@@ -8,6 +8,9 @@ WARNING: This is an early alpha version, currently only supporting TypeScript.
 
 This plugin currently requires a `cdk8s.yaml` file to be anywhere in the repository to be activated.
 
+This plugin doesn't use `cdk8s-cli` (`ts-node` instead) and requires output to standard output, so that at some point
+your code should do `console.log(app.synthYaml());` instead of classical `app.synth()`.
+
 ## Usage
 
 Step 1: add an extra container to ArgoCD Helm release:
