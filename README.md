@@ -19,7 +19,7 @@ Step 1: add an extra container to ArgoCD Helm release:
 {
   "extraContainers": [
     {
-      "name": "tanka-cmp",
+      "name": "cdk8s-cmp",
       "image": "kurzdigital/argocd-cdk8s-plugin",
       "securityContext": {
         "runAsUser": 999
@@ -43,17 +43,10 @@ Step 1: add an extra container to ArgoCD Helm release:
 }
 ```
 
-Step 2: add plugin configuration to your ArgoCD application:
+Step 2 (optional): add plugin configuration to your ArgoCD application:
 
 ```yaml
 spec:
   source:
-    plugin:
-      env:
-        - name: CDK8S_ENV
-          value: default
+    plugin: {}
 ```
-
-### Environment variables
-
-- `CDK8S_ENV`: `cdk8s` environment to render
