@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ConfigManagementPlugin
 metadata:
-    name: tanka-plugin
+  name: cdk8s-plugin
 spec:
-    version: v1.0
-    generate:
-        command:
-            - bash
-            - "-c"
-            - "/script-wrapper /generate"
+  version: v1.0
+  generate:
+    command:
+      - bash
+      - "-c"
+      - "/script-wrapper /generate"
 
-    init:
-        command:
-            - bash
-            - "-c"
-            - "/script-wrapper /init"
+  init:
+    command:
+      - bash
+      - "-c"
+      - "/script-wrapper /init"
 
-    discover:
-        find:
-            command: ["bash", "-c", "/script-wrapper /discover"]
+  discover:
+    find:
+      command: ["bash", "-c", "/script-wrapper /discover"]
