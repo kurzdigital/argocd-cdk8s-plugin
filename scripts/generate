@@ -2,11 +2,8 @@
 
 set -ue
 
-if [ -f "package.json" ]; then
-    # TypeScript support
-    npm ci && ts-node "main.ts" 
-    exit 0
-fi
-
-echo "No matching files found"
-exit 1
+find . -iname 'cdk8s.yaml' | while read -r cdk8s; do
+    pushd "$(dirname "$cdk8s")" >/dev/null
+    cdk8s --check-upgrade=false synth -p
+    popd >/dev/null
+done
