@@ -20,12 +20,14 @@ STDERR="$LOG_DIR/$SCRIPT_NAME.stderr.log"
 # Log all the environment variables
 export > "$ENVLOG"
 
-# Log all the files in the current directory
-tree --gitignore > "$FILESLOG"
+# Log all the files in the current directory, ignoring stuff in .gitingore
+# 
+# NOTE: `tree` in recent versions has a `--gitignore` option, but it's not available in the version of `tree` that ships
+# with the `node` image.
+tree $(awk '/^[^#]/ && NF {printf "-I %s ", $0}' .gitignore) > "$FILESLOG"
 
 # This method is extremely easy to implement and read and should be more than enough for a CMP. However, it destroys the
 # order of stdout and stderr, so this needs to be fixed if the order is required (which it is not IIRC).
-
 "$SCRIPT" 1> "$STDOUT" 2> "$STDERR"  
 
 cat "$STDOUT"
