@@ -2,9 +2,6 @@
 
 set -ue
 
-# We need a home directory set for helm to be able to write its caches somewhere.
-export HOME=/tmp/helm/
-
 find . -iname 'cdk8s.yaml' | while read -r cdk8s; do
     pushd "$(dirname "$cdk8s")" >/dev/null
 

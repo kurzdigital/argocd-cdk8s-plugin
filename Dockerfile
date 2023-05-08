@@ -8,6 +8,9 @@ RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linu
 
 FROM node:16-slim
 
+# We need to set a home directory, since both Helm and NPM won't be able to write to /.
+ENV HOME=/tmp/argocd-cdk8s-plugin/
+
 RUN apt-get update && apt-get install git ca-certificates -y --no-install-recommends && rm -rf /var/lib/apt/lists/* && \
     npm install -g cdk8s-cli
 COPY --from=helm /usr/local/bin/ /usr/local/bin/
