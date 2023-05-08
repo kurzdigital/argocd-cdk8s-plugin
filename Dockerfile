@@ -6,7 +6,7 @@ ARG HELM_VERSION=3.11.3
 ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz /tmp/tarballs/
 RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linux-amd64/helm
 
-FROM node:16-slim
+FROM node:16-bullseye-slim
 
 # We need to set a home directory, since both Helm and NPM won't be able to write to /.
 ENV HOME=/tmp/argocd-cdk8s-plugin/
