@@ -13,11 +13,15 @@ SCRIPT_NAME=$(basename "$SCRIPT")
 mkdir -p "$LOG_DIR"
 
 ENVLOG="$LOG_DIR/$SCRIPT_NAME.env.log"
+FILESLOG="$LOG_DIR/$SCRIPT_NAME.files.log"
 STDOUT="$LOG_DIR/$SCRIPT_NAME.stdout.log"
 STDERR="$LOG_DIR/$SCRIPT_NAME.stderr.log"
 
 # Log all the environment variables
 export > "$ENVLOG"
+
+# Log all the files in the current directory
+tree --gitignore > "$FILESLOG"
 
 # This method is extremely easy to implement and read and should be more than enough for a CMP. However, it destroys the
 # order of stdout and stderr, so this needs to be fixed if the order is required (which it is not IIRC).
