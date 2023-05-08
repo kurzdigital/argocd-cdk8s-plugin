@@ -2,7 +2,7 @@
 
 set -ue
 
-find . -iname 'cdk8s.yaml' | while read -r cdk8s; do
+/discover | while read -r cdk8s; do
     pushd "$(dirname "$cdk8s")" >/dev/null
     npx cdk8s --check-upgrade=false synth -p
     popd >/dev/null
