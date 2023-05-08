@@ -5,6 +5,8 @@ set -ue
 find . -iname 'cdk8s.yaml' | while read -r cdk8s; do
     pushd "$(dirname "$cdk8s")" >/dev/null
 
+    cdk8s --check-upgrade=false import
+    
     # TypeScript support: cdk8s projects are just npm projects, so we only need to install the depencendencies
     if [ -f "package.json" ]; then
         npm install
