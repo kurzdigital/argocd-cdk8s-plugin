@@ -4,6 +4,6 @@ set -ue
 
 find . -iname 'cdk8s.yaml' | while read -r cdk8s; do
     pushd "$(dirname "$cdk8s")" >/dev/null
-    cdk8s --check-upgrade=false synth -p
+    npx cdk8s --check-upgrade=false synth -p
     popd >/dev/null
 done
