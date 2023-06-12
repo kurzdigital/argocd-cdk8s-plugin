@@ -11,6 +11,7 @@ FROM node:16-bullseye-slim
 # We need to set a home directory, since both Helm and NPM won't be able to write to /.
 ENV HOME=/tmp/argocd-cdk8s-plugin/
 
+RUN mkdir $HOME && chmod 770 $HOME
 RUN apt-get update && apt-get install git tree ca-certificates -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
 COPY --from=helm /usr/local/bin/ /usr/local/bin/
 COPY plugin.yaml /home/argocd/cmp-server/config/plugin.yaml
