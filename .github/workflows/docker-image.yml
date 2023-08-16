@@ -21,5 +21,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          platforms: linux/amd64, linux/arm/v7
           push: true
           tags: kurzdigital/argocd-cdk8s-plugin:latest
