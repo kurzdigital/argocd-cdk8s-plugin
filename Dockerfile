@@ -4,8 +4,8 @@ FROM ubuntu:22.04 as helm
 ARG HELM_VERSION=3.11.3
 ARG TARGETARCH=amd64
 
-ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-${ARCH}.tar.gz /tmp/tarballs/
-RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linux-${ARCH}/helm
+ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-${TARGETARCH}.tar.gz /tmp/tarballs/
+RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linux-${TARGETARCH}/helm
 
 FROM node:16-bullseye-slim
 
