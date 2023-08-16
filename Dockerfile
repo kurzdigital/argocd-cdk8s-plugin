@@ -2,7 +2,7 @@
 # helm: kubernetes package manager
 FROM ubuntu:22.04 as helm
 ARG HELM_VERSION=3.11.3
-ARG TARGETARCH=amd64
+ARG TARGETARCH
 
 ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-${TARGETARCH}.tar.gz /tmp/tarballs/
 RUN tar zxvf /tmp/tarballs/*.tar.gz -C /usr/local/bin/ --strip-components=1 linux-${TARGETARCH}/helm
