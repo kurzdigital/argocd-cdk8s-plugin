@@ -2,8 +2,18 @@
 
 set -ue
 
-/discover | while read -r cdk8s; do
+SCRIPT_DIR=$(readlink -f "$(dirname "$0")")
+
+"$SCRIPT_DIR/discover" | while read -r cdk8s; do
     pushd "$(dirname "$cdk8s")" >/dev/null
-    npx cdk8s --check-upgrade=false synth -p
+    DIR=$(mktemp -d)
+
+    # Right now, cdk8s-cli has an issue with `-p` option when used with multiple charts:
+    # https://github.com/cdk8s-team/cdk8s-cli/issues/943 We work around it by outputting files outselves.
+    npx cdk8s --check-upgrade=false synth -o "$DIR" > /dev/null
+    find "$DIR" -type f | while read -r line; do
+        cat "$line"
+        echo "---"
+    done
     popd >/dev/null
 done
